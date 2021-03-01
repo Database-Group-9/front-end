@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Form, Container, Modal} from 'react-bootstrap';
+import { Navbar, Nav, Form, Container, Button, Modal} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 export default class Header extends React.Component{
@@ -34,6 +34,9 @@ export default class Header extends React.Component{
                         // onChange={() => {}}
                         // ref={this.search}
                     />
+                    <Button variant="primary" type="submit" className='ml-3'>
+                        Submit
+                    </Button>
                 </Container>
             </Navbar>
             </>;
