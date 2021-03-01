@@ -8,18 +8,18 @@ import API from '../../utils/backend-api'
 // import FAKE from '../fakedata'
 
 export default class MovieListPage extends React.Component{
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {results: undefined, error: undefined, id:undefined};
+    constructor(props) {
+        super(props);
+        this.state = {results: undefined, error: undefined, id:undefined};
 
-    //     this.getdata();
-    // }
+        this.getdata();
+    }
 
-    // getdata(){
-    //     API.getMovieList().map((response) => {
-    //         console.log(response);
-    //     });
-    // }
+    getdata(){
+        API.getGreetings().then((response) => {
+            console.log(response);
+        });
+    }
     // const [open, setOpen] = useState(false);
     // const categories = ["Action", "Adventure", "Comedy", "Drama"]
     render() {
@@ -42,7 +42,7 @@ export default class MovieListPage extends React.Component{
             </div>  */} 
             <CardGroup>
                 {API.getMovieList().map((movie) => {
-                    console.log(movie)
+                    // console.log(movie)
                     return (
                         <Card>
                             <Card.Body>

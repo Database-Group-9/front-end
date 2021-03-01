@@ -1,9 +1,14 @@
 import Axios from 'axios';
 
+const base_url = 'http://localhost:3001/';
 const API = {
     getMovieList: () => {
         return fake;
-    }
+    },
+
+    getGreetings: () => {
+        return Axios.get(base_url);
+    },
 }
 
 
