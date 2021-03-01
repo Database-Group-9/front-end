@@ -24,6 +24,11 @@
   color: white;
 }
 
+.header-element {
+  align-items: baseline;
+  min-height: 4vh;
+}
+
 .App-link {
   color: #61dafb;
 }

@@ -6,7 +6,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import Filter from './Filter.js'
 
 // importing the fake data
-import FAKE from '../fakedata';
+import FAKE from '../components/fakedata';
 
 function Main() {
     const [open, setOpen] = useState(false);
