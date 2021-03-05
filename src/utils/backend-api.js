@@ -9,6 +9,10 @@ const API = {
     getGreetings: () => {
         return Axios.get(base_url);
     },
+
+    getMovie: () => {
+        return Axios.get(base_url + 'movies')
+    },
 }
 
 

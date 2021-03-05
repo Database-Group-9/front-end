@@ -1,28 +1,52 @@
 import React from 'react';
 import CardGroup from 'react-bootstrap/CardGroup'
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
+// import Button from 'react-bootstrap/Button';
+import {Table,Spinner }from 'react-bootstrap'
+// import Collapse from 'react-bootstrap/Collapse';
 import API from '../../utils/backend-api'
 // import Filter from './Filter.js'
-// import FAKE from '../fakedata'
 
 export default class MovieListPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {results: undefined, error: undefined, id:undefined};
 
-        this.getdata();
+        this.state = {
+            results: [], 
+            ready:false, 
+        };
+        this.getData();
     }
 
-    getdata(){
-        API.getGreetings().then((response) => {
-            console.log(response);
-        });
+    getData(){
+        // API.getGreetings().then((response) => {
+        //     console.log(response);
+        // });
+        API.getMovie().then((response) =>{
+            this.setState({
+                results: response.data,
+                ready: true,
+            })
+            console.log(response)
+        })
+        // this.setState({
+        //     results: API.getMovieList(),
+        //     ready: true,
+        // });
+        // console.log(this.state)
+        // API.getMovieList().map((movie) => {
+        //     this.setState({
+        //         results: movie,
+        //         ready: true,
+        //     });
+        //     console.log(this.state)
+        // })
     }
     // const [open, setOpen] = useState(false);
     // const categories = ["Action", "Adventure", "Comedy", "Drama"]
     render() {
+        console.log(this.state)
+        if (this.state.ready) {
         return <div>
             {/* <div class="container-fluid">
                 {/* <div class="row">
@@ -40,25 +64,31 @@ export default class MovieListPage extends React.Component{
                     </Collapse> : null}
                 </div>
             </div>  */} 
-            <CardGroup>
-                {API.getMovieList().map((movie) => {
-                    // console.log(movie)
+            <Table striped bordered hover variant="dark">
+            <thead>
+                <tr>
+                    <th>Movie Name</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                    {/* <th>Tags</th> */}
+                </tr>
+            </thead>
+            <tbody>
+                {this.state.results.map((movie) => {
                     return (
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>{movie.name}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{movie.rating}</Card.Subtitle>
-                                {movie.genres.map((genre) => {
-                                    return <Card.Link href="#">{genre}</Card.Link>
-                                })}
-                                {movie.tags.map((tag) => {
-                                    return <Card.Link href="#">{tag}</Card.Link>
-                                })}
-                            </Card.Body>
-                        </Card>
-                    )
-                })}
-            </CardGroup> 
-        </div>
+                <tr>
+                    <td>{movie.title}</td>
+                    <td>{movie.year}</td>
+                    <td>{movie.genre.map((genres) => {
+                                    return <div><a href="#">{genres}</a> </div>
+                                })}</td>
+                    {/* <td>{movie.tags.map((tag) => {
+                                    return <div><a href="#">{tag} </a></div>
+                                })}</td> */}
+                </tr>)})}
+            </tbody>
+            </Table>
+        </div>}
+        return <Spinner className="loading" variant="primary" animation="border"/>;
     }
 }
