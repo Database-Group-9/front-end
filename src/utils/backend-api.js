@@ -13,6 +13,10 @@ const API = {
     getMovie: () => {
         return Axios.get(base_url + 'movies')
     },
+
+    getSingleMovie: () => {
+        return Axios.get(base_url + 'movie')
+    }
 }
 
 

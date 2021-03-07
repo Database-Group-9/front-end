@@ -1,6 +1,4 @@
 import React from 'react';
-import CardGroup from 'react-bootstrap/CardGroup'
-import Card from 'react-bootstrap/Card';
 // import Button from 'react-bootstrap/Button';
 import {Table,Spinner }from 'react-bootstrap'
 // import Collapse from 'react-bootstrap/Collapse';
@@ -19,9 +17,6 @@ export default class MovieListPage extends React.Component{
     }
 
     getData(){
-        // API.getGreetings().then((response) => {
-        //     console.log(response);
-        // });
         API.getMovie().then((response) =>{
             this.setState({
                 results: response.data,
@@ -29,18 +24,6 @@ export default class MovieListPage extends React.Component{
             })
             console.log(response)
         })
-        // this.setState({
-        //     results: API.getMovieList(),
-        //     ready: true,
-        // });
-        // console.log(this.state)
-        // API.getMovieList().map((movie) => {
-        //     this.setState({
-        //         results: movie,
-        //         ready: true,
-        //     });
-        //     console.log(this.state)
-        // })
     }
     // const [open, setOpen] = useState(false);
     // const categories = ["Action", "Adventure", "Comedy", "Drama"]
@@ -77,7 +60,7 @@ export default class MovieListPage extends React.Component{
                 {this.state.results.map((movie) => {
                     return (
                 <tr>
-                    <td>{movie.title}</td>
+                    <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                     <td>{movie.year}</td>
                     <td>{movie.genre.map((genres) => {
                                     return <div><a href="#">{genres}</a> </div>
