@@ -95,6 +95,20 @@ export default class MovieListPage extends React.Component{
         return pages;
     }
 
+    firstPage(){
+        if(parseInt(this.state.page) === 1){
+            return true
+        }
+        return false
+    }
+
+    lastPage(){
+        if(this.state.page == this.state.totalPage){
+            return true
+        }
+        return false
+    }
+
 
     render() {
         // console.log(this.props.page)
@@ -148,11 +162,11 @@ export default class MovieListPage extends React.Component{
             </Table>
             <Pagination>
                 <Pagination.First key='firstpage' onClick={this.getPageData.bind(this,1)}/>
-                <Pagination.Prev  key='prevpage' onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
+                <Pagination.Prev  key='prevpage' disabled={this.firstPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
                 <Pagination.Item key={1} onClick={this.getPageData.bind(this,1)}>{1}</Pagination.Item>
                 {this.getpage()}
                 <Pagination.Item key={this.state.totalPage} onClick={this.getPageData.bind(this,this.state.totalPage)}>{this.state.totalPage}</Pagination.Item>
-                <Pagination.Next key='nextpage' onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
+                <Pagination.Next key='nextpage' disabled={this.lastPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
                 <Pagination.Last key='lastpage' onClick={this.getPageData.bind(this,this.state.totalPage)}/>
             </Pagination>
         </div>}
