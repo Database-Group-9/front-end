@@ -12,7 +12,7 @@ export default class MovieListPage extends React.Component {
         }
         else {
                 return <div className="page">
-                    <MovieList page={1,'page'}/>
+                    <MovieList page={1}/>
                     </div>
         }
     }

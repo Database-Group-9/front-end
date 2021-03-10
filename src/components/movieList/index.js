@@ -22,8 +22,8 @@ export default class MovieListPage extends React.Component{
 
     getData(){
         API.getNumberOfPage().then((response) =>{
-            const page = Math.floor(parseInt(response.data.data[0].count) / 10)
-            const remainder = parseInt(response.data.data[0].count) % 10
+            const page = Math.floor(parseInt(response.data.data) / 10)
+            const remainder = parseInt(response.data.data) % 10
             if (remainder != 0){
                 this.setState({totalPage:page+1})
             }
@@ -32,7 +32,7 @@ export default class MovieListPage extends React.Component{
             }
             
         })
-        API.getMovies(this.state.page).then((response) =>{
+        API.getMovies().then((response) =>{
             this.setState({
                 results: response.data.data,
                 ready: true,
@@ -42,8 +42,11 @@ export default class MovieListPage extends React.Component{
     }
     
     getPageData(i) {
-        this.setState({ready: false});
-        history.push(`/?page=${i}`);
+        if (i != this.state.page){
+            this.setState({ready: false});
+            history.push(`/?page=${i}`);
+        }
+        
     }
 
 

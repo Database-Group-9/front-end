@@ -11,7 +11,9 @@ const API = {
     },
 
     getMovies: (page) => {
-        // console.log(base_url + 'movies/?page='+page)
+        if (page ===undefined){
+            page =1
+        }
         return Axios.get(base_url + 'movies/?page='+page)
     },
 
