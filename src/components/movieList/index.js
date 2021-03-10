@@ -1,31 +1,43 @@
 import React from 'react';
-// import Button from 'react-bootstrap/Button';
-import {Table,Spinner,Button,Pagination, ListGroupItem }from 'react-bootstrap'
+import {Table,Spinner,Pagination, ListGroupItem }from 'react-bootstrap'
 // import Collapse from 'react-bootstrap/Collapse';
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
 // import Filter from './Filter.js'
+import './movieList.scss'
 
 export default class MovieListPage extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            results: API.getFake(1), 
-            ready:true, 
+            results: [], 
+            ready:false, 
             page:1,
-            totalPage:20,
+            totalPage:undefined,
+            // genre: API.getGenre(),
         };
-        // this.getData();
+        this.getData();
     }
 
     getData(){
+        API.getNumberOfPage().then((response) =>{
+            const page = Math.floor(parseInt(response.data.data[0].count) / 10)
+            const remainder = parseInt(response.data.data[0].count) % 10
+            if (remainder != 0){
+                this.setState({totalPage:page+1})
+            }
+            else {
+                this.setState({totalPage:page})
+            }
+            
+        })
         API.getMovies(this.state.page).then((response) =>{
             this.setState({
-                results: response.data,
+                results: response.data.data,
                 ready: true,
             })
-            console.log(response)
+            // console.log(response)
         })
     }
     
@@ -42,21 +54,13 @@ export default class MovieListPage extends React.Component{
 
     changepage(){
         if (this.props.page !== this.state.page) {
-            console.log(this.props.page) 
-            this.setState({
-                        results: API.getFake(this.props.page),
-                        ready:true,
-                        page: this.props.page,
-                    });
-                    this.getpage()
-
-            // API.getMovies(this.props.page).then((response) => {
-            //     this.setState({
-            //         results: response.data,
-            //         ready: true,
-            //         page: this.props.page,
-            //     });
-            // });
+            API.getMovies(this.props.page).then((response) => {
+                this.setState({
+                    results: response.data.data,
+                    ready: true,
+                    page: this.props.page,
+                });
+            });
         }
     }
 
@@ -70,30 +74,35 @@ export default class MovieListPage extends React.Component{
             for (let i = 2; i < currentpage + 2; i++){
                 pages.push(<Pagination.Item key={i} onClick={this.getPageData.bind(this,i)}>{i}</Pagination.Item>)
             }
-            pages.push(<Pagination.Ellipsis />)
+            pages.push(<Pagination.Ellipsis key='after'/>)
         }
-        else if (currentpage == maxpage || currentpage > maxpage - 2){
-            pages.push(<Pagination.Ellipsis />)
-            for (let i = currentpage - 2; i < currentpage; i++){
+        else if (currentpage > maxpage - 3 || currentpage == maxpage){
+            pages.push(<Pagination.Ellipsis key='before' />)
+            for (let i = currentpage - 2; i < maxpage; i++){
                 pages.push(<Pagination.Item key={i} onClick={this.getPageData.bind(this,i)}>{i}</Pagination.Item>)
             }
         }
         else{
-            pages.push(<Pagination.Ellipsis />)
+            pages.push(<Pagination.Ellipsis key='before' />)
             for (let i = currentpage - 1; i < currentpage + 2; i++){
                 pages.push(<Pagination.Item key={i} onClick={this.getPageData.bind(this,i)}>{i}</Pagination.Item>)
             }
-            pages.push(<Pagination.Ellipsis />)
+            pages.push(<Pagination.Ellipsis key='after'/>)
         }
         return pages;
     }
 
 
     render() {
-        console.log(this.props.page)
-        console.log(this.state)
+        // console.log(this.props.page)
+        // console.log(this.state)
         if (this.state.ready) {
         return <div>
+            {/* <div className='sidenav'>
+                {this.state.genre.map((genre) => 
+                    <a href="#">genre</a>
+                )}
+            </div> */}
             {/* <div class="container-fluid">
                 {/* <div class="row">
                     {open ? 
@@ -122,7 +131,7 @@ export default class MovieListPage extends React.Component{
             <tbody>
                 {this.state.results.map((movie) => {
                     return (
-                <tr>
+                <tr key={movie.movieid}>
                     <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                     <td>{movie.year}</td>
                     {/* <td>{movie.genre.map((genres) => {
@@ -135,13 +144,13 @@ export default class MovieListPage extends React.Component{
             </tbody>
             </Table>
             <Pagination>
-                <Pagination.First key={1} onClick={this.getPageData.bind(this,1)}/>
-                <Pagination.Prev  key={parseInt(this.state.page) - 1} onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
+                <Pagination.First key='firstpage' onClick={this.getPageData.bind(this,1)}/>
+                <Pagination.Prev  key='prevpage' onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
                 <Pagination.Item key={1} onClick={this.getPageData.bind(this,1)}>{1}</Pagination.Item>
                 {this.getpage()}
                 <Pagination.Item key={this.state.totalPage} onClick={this.getPageData.bind(this,this.state.totalPage)}>{this.state.totalPage}</Pagination.Item>
-                <Pagination.Next key={parseInt(this.state.page) + 1} onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
-                <Pagination.Last key={this.state.totalPage} onClick={this.getPageData.bind(this,this.state.totalPage)}/>
+                <Pagination.Next key='nextpage' onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
+                <Pagination.Last key='lastpage' onClick={this.getPageData.bind(this,this.state.totalPage)}/>
             </Pagination>
         </div>}
         return <Spinner className="loading" variant="primary" animation="border"/>;

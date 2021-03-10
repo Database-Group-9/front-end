@@ -6,7 +6,7 @@ export default class Header extends React.Component{
     render() {
         return <>
                     <Navbar className="navbar" variant="light">
-                <LinkContainer to="/">
+                <LinkContainer to="/?page=1">
                     <Navbar.Brand className="logo-title">
                         Main Page Pipols
                     </Navbar.Brand>

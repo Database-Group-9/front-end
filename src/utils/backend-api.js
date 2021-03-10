@@ -11,7 +11,7 @@ const API = {
     },
 
     getMovies: (page) => {
-        console.log(base_url + 'movies/?page='+page)
+        // console.log(base_url + 'movies/?page='+page)
         return Axios.get(base_url + 'movies/?page='+page)
     },
 
@@ -21,12 +21,30 @@ const API = {
 
     getSingleMovie: () => {
         return Axios.get(base_url + 'movie')
+    },
+
+    getNumberOfPage: () => {
+        return Axios.get(base_url + 'totalRows')
+    },
+
+    getGenre: () => {
+        return genre;
     }
 }
 
 
 export default API;
 
+const genre= [
+    {
+        genreid:1,
+        genre: 'Adventure',
+    },
+    {
+        genreid:2,
+        genre:'Romance',
+    }
+]
 const fake = [
     {
         movieid: 1,
