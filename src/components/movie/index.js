@@ -1,6 +1,6 @@
 import React from 'react';
 import API from '../../utils/backend-api';
-import { Dropdown, Row, Col, Table, Container} from 'react-bootstrap';
+import { Dropdown, Row, Col, Table, Container, Pagination} from 'react-bootstrap';
 
 const Divider = Dropdown.Divider;
 
@@ -11,13 +11,13 @@ export default class MovieListPage extends React.Component{
             results: undefined, 
             ready:false, 
         };
-        this.getData();
+        this.getData()
     }
     
     getData(){
         API.getSingleMovie().then((response) =>{
             this.setState({
-                results: response.data[0],
+                results: [], //response.data[0],
                 ready: true,
             })
             // console.log(response)
@@ -48,13 +48,15 @@ export default class MovieListPage extends React.Component{
         </Table>
         <Divider/>
         </>
-        return <Container className="text-left">
+        return <div><Container className="text-left">
         <Row>
             <Col>
                 {overview}
             </Col>
         </Row>
         </Container>
+        
+        </div>
 
     }
 }
