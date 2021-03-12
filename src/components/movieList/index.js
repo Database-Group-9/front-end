@@ -1,11 +1,11 @@
 import React from 'react';
-import {Table,Spinner,Pagination, ListGroupItem, Container, Row, Col }from 'react-bootstrap'
-// import Collapse from 'react-bootstrap/Collapse';
+import {Table,Spinner, ListGroupItem, Container, Row, Col }from 'react-bootstrap'
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
 // import Filter from './Filter.js'
 import './movieList.scss'
 import Sidebar from '../sidebar'
+import PageBar from '../pageBar';
 
 export default class MovieListPage extends React.Component{
     constructor(props) {
@@ -16,26 +16,15 @@ export default class MovieListPage extends React.Component{
             ready:false, 
             page:1,
             totalPage:undefined,
-            // genre: API.getGenre(),
         };
         this.getData();
     }
 
     getData(){
-        API.getNumberOfPage().then((response) =>{
-            const page = Math.floor(parseInt(response.data.data) / 20)
-            const remainder = parseInt(response.data.data) % 20
-            if (remainder != 0){
-                this.setState({totalPage:page+1})
-            }
-            else {
-                this.setState({totalPage:page})
-            }
-            
-        })
         API.getMovies().then((response) =>{
             this.setState({
                 results: response.data.data,
+                totalPage: response.data.meta.totalPage,
                 ready: true,
             })
             // console.log(response)
@@ -49,8 +38,6 @@ export default class MovieListPage extends React.Component{
         }
         
     }
-
-
 
     componentDidUpdate(){
         this.changepage();
@@ -67,74 +54,10 @@ export default class MovieListPage extends React.Component{
             });
         }
     }
-
-    getpage = () => {
-        const maxpage = parseInt(this.state.totalPage)
-        const currentpage = parseInt(this.state.page)
-
-        let pages = []
-
-        if (currentpage == 1 || currentpage == 2 || currentpage == 3){
-            for (let i = 2; i < currentpage + 2; i++){
-                pages.push(<Pagination.Item key={i} onClick={this.getPageData.bind(this,i)}>{i}</Pagination.Item>)
-            }
-            pages.push(<Pagination.Ellipsis key='after'/>)
-        }
-        else if (currentpage > maxpage - 3 || currentpage == maxpage){
-            pages.push(<Pagination.Ellipsis key='before' />)
-            for (let i = currentpage - 2; i < maxpage; i++){
-                pages.push(<Pagination.Item key={i} onClick={this.getPageData.bind(this,i)}>{i}</Pagination.Item>)
-            }
-        }
-        else{
-            pages.push(<Pagination.Ellipsis key='before' />)
-            for (let i = currentpage - 1; i < currentpage + 2; i++){
-                pages.push(<Pagination.Item key={i} onClick={this.getPageData.bind(this,i)}>{i}</Pagination.Item>)
-            }
-            pages.push(<Pagination.Ellipsis key='after'/>)
-        }
-        return pages;
-    }
-
-    firstPage(){
-        if(parseInt(this.state.page) === 1){
-            return true
-        }
-        return false
-    }
-
-    lastPage(){
-        if(this.state.page == this.state.totalPage){
-            return true
-        }
-        return false
-    }
-
-
+ 
     render() {
         if (this.state.ready) {
         return <div>
-            {/* <div className='sidenav'>
-                {this.state.genre.map((genre) => 
-                    <a href="#">genre</a>
-                )}
-            </div> */}
-            {/* <div class="container-fluid">
-                {/* <div class="row">
-                    {open ? 
-                    <Collapse in={open}>
-                        <div class="row">
-                            {categories.map((category) => {
-                                return (
-                                    // <div className="col">
-                                        <button type="button" class="btn btn-outline-primary ml-3">{category}</button>
-                                    // </div>
-                                )
-                            })}
-                        </div>
-                    </Collapse> : null}
-                </div>
-            </div>  */} 
             <Container fluid>
                 <Row>
                     <Col xs={2}><Sidebar/></Col>
@@ -163,15 +86,7 @@ export default class MovieListPage extends React.Component{
                             </tr>)})}
                         </tbody>
                         </Table>
-                        <Pagination>
-                            <Pagination.First key='firstpage' onClick={this.getPageData.bind(this,1)}/>
-                            <Pagination.Prev  key='prevpage' disabled={this.firstPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
-                            <Pagination.Item key={1} onClick={this.getPageData.bind(this,1)}>{1}</Pagination.Item>
-                            {this.getpage()}
-                            <Pagination.Item key={this.state.totalPage} onClick={this.getPageData.bind(this,this.state.totalPage)}>{this.state.totalPage}</Pagination.Item>
-                            <Pagination.Next key='nextpage' disabled={this.lastPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
-                            <Pagination.Last key='lastpage' onClick={this.getPageData.bind(this,this.state.totalPage)}/>
-                        </Pagination>
+                        <PageBar page={this.state.page} totalPage={this.state.totalPage} getPageData={this.getPageData.bind(this)}/>
                     </Col>
                 </Row>
             </Container>

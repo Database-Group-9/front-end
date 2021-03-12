@@ -59,60 +59,63 @@ export default class Sidebar extends React.Component{
     }
 
     render(){
+        console.log(this.state)
         return(
             <div>
-                <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
+                <Nav className="p-2 text-left col-md-12 d-none d-md-block bg-dark text-white sidebar"
                 activeKey="/home"
                 onSelect={selectedKey => alert(`selected ${selectedKey}`)}
                 >
                 <Nav.Item onClick={() => this.setOpenSort()}>
                     Sort By:
                 </Nav.Item>
-                {this.state.openSort ? 
-                <Collapse in={this.state.openSort}>
+                {/* {this.state.openSort ? 
+                <Collapse in={this.state.openSort}> */}
                     <div>
-                    <Form.Control as="select" onChange={this.handleSelect}>
+                    <Form>
                         {this.state.sort.map((item) => {
-                            return(<option value={item}>{item}</option>)
+                            return(<Form.Check onClick={this.handleSelectOrder.bind(this)} value={item} type='radio' name='sortby' label={item}/>)
                         })}
-                    </Form.Control>
-                    <Form.Control as="select" onChange={this.handleSelectOrder}>
-                        <option value="asc">Ascending</option>
-                        <option value="desc">Descending</option>
-                    </Form.Control>
+                    </Form>
+                    Sort Order:
+                    <Form>
+                        <Form.Check type='radio' name='sorttype' label="ascending"/>
+                        <Form.Check type='radio' name='sorttype' label="descending"/>
+                    </Form>
                     </div>
-                </Collapse>: null}
-                <Nav.Item>
+                {/* </Collapse>: null} */}
+                {/* <Nav.Item>
                     <Button>Apply</Button>
-                </Nav.Item>
-                </Nav>
-                <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
+                </Nav.Item> */}
+                
+
+                {/* <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
                 activeKey="/home"
                 onSelect={selectedKey => alert(`selected ${selectedKey}`)}
-                >
+                > */}
                 <Nav.Item onClick={() => this.setOpenGenre()}>
-                    Filter By Genre:
+                    Genre:
                 </Nav.Item>
-                {this.state.openGenre ? <Collapse in={this.state.openGenre}>
+                {/* {this.state.openGenre ? <Collapse in={this.state.openGenre}> */}
                     <Form>
                         {this.state.genres.map((genre) => {
                             return(<Form.Check label={genre.genre}/>)
                         })}
                     </Form>
-                </Collapse>: null}
-                <Nav.Item>
+                {/* </Collapse>: null} */}
+                {/* <Nav.Item>
                     <Button>Apply</Button>
-                </Nav.Item>
-                </Nav>
+                </Nav.Item> */}
+                {/* </Nav> */}
 
-                <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
+                {/* <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
                 activeKey="/home"
                 onSelect={selectedKey => alert(`selected ${selectedKey}`)}
-                >
+                > */}
                 <Nav.Item onClick={() => this.setOpenYear()}>
                     Filter By Year:
                 </Nav.Item>
-                {this.state.openYear ? <Collapse in={this.state.openYear}>
+                {/* {this.state.openYear ? <Collapse in={this.state.openYear}> */}
                     <div>
                     <Form.Group>
                         <Form.Label>From</Form.Label>
@@ -123,7 +126,7 @@ export default class Sidebar extends React.Component{
                         <Form.Control placeholder="Enter Year" />
                     </Form.Group>
                     </div>
-                </Collapse>: null}
+                {/* </Collapse>: null} */}
                 <Nav.Item>
                     <Button>Apply</Button>
                 </Nav.Item>
