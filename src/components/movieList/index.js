@@ -22,8 +22,8 @@ export default class MovieListPage extends React.Component{
 
     getData(){
         API.getNumberOfPage().then((response) =>{
-            const page = Math.floor(parseInt(response.data.data) / 10)
-            const remainder = parseInt(response.data.data) % 10
+            const page = Math.floor(parseInt(response.data.data) / 20)
+            const remainder = parseInt(response.data.data) % 20
             if (remainder != 0){
                 this.setState({totalPage:page+1})
             }
@@ -111,8 +111,6 @@ export default class MovieListPage extends React.Component{
 
 
     render() {
-        // console.log(this.props.page)
-        // console.log(this.state)
         if (this.state.ready) {
         return <div>
             {/* <div className='sidenav'>
