@@ -2,6 +2,7 @@ import React from 'react';
 import {Table,Spinner, ListGroupItem, Container, Row, Col }from 'react-bootstrap'
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
+import TableComp from '../tableComp'
 // import Filter from './Filter.js'
 import './movieList.scss'
 import Sidebar from '../sidebar'
@@ -101,30 +102,7 @@ export default class MovieListPage extends React.Component{
                 <Row>
                     <Col xs={2}><Sidebar/></Col>
                     <Col xs={10}>
-                        <Table striped bordered hover variant="dark">
-                        <thead>
-                            <tr>
-                                <th>Movie Name</th>
-                                <th>Year</th>
-                                {/* <th>Genre</th> */}
-                                {/* <th>Tags</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.results.map((movie) => {
-                                return (
-                            <tr key={movie.movieid}>
-                                <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
-                                <td>{movie.year}</td>
-                                {/* <td>{movie.genre.map((genres) => {
-                                                return <div><a href="#">{genres}</a> </div>
-                                            })}</td> */}
-                                {/* <td>{movie.tags.map((tag) => {
-                                                return <div><a href="#">{tag} </a></div>
-                                            })}</td> */}
-                            </tr>)})}
-                        </tbody>
-                        </Table>
+                        <TableComp movies={this.state.results}/>
                         <PageBar page={this.state.page} totalPage={this.state.totalPage} getPageData={this.getPageData.bind(this)}/>
                     </Col>
                 </Row>

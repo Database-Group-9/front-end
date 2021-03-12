@@ -34,8 +34,10 @@ export default class Movie extends React.Component{
         const res = this.state.results
         const overview = <>
         <h1>{res[0].title} ({res[0].year})</h1>
+        External Link: 
         <a href={'https://www.imdb.com/title/tt' + res[0].imdbid + '/'}>IMDB</a>
         &nbsp;
+        ,
         <a href={'https://www.themoviedb.org/movie/' + res[0].tmdbid + '/'}>TMDB</a>
         <Divider/>
         <h3>Average Rating : {res[0].avgrating.slice(0,4)} / 5.00</h3>
