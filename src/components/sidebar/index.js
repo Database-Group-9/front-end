@@ -110,7 +110,7 @@ export default class Sidebar extends React.Component{
                 {/* {this.state.openGenre ? <Collapse in={this.state.openGenre}> */}
                     <Form>
                         {this.state.genres.map((genre) => {
-                            return(<Form.Check onChange={this.handleSelectGenre.bind(this)} value={genre.genre} label={genre.genre}/>)
+                            return(<Form.Check onChange={this.handleSelectGenre.bind(this)} value={genre.genreid} label={genre.genre}/>)
                         })}
                     </Form>
 

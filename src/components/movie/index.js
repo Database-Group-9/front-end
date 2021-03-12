@@ -26,6 +26,7 @@ export default class Movie extends React.Component{
     }
     
     render() {
+        console.log(this.state.results)
         const results = this.state.results
         if (results === undefined){
             return(<h1>tibe</h1>)
@@ -35,7 +36,7 @@ export default class Movie extends React.Component{
         const overview = <>
         <h1>{res[0].title} ({res[0].year})</h1>
         <Divider/>
-        <h3>Average Rating : {res[0].avgrating.slice(0, 4)} / 5.00</h3>
+        <h3>Average Rating : {res[0].avgrating.slice(0,4)} / 5.00</h3>
         <h5>Genre : </h5>
         <Table striped bordered hover variant="light">
         <tbody>
