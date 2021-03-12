@@ -30,7 +30,7 @@ const API = {
     },
 
     getGenre: () => {
-        return genre;
+        return Axios.get(base_url + 'genres')
     }
 }
 

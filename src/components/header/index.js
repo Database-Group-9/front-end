@@ -8,18 +8,18 @@ export default class Header extends React.Component{
                     <Navbar className="navbar" variant="light">
                 <LinkContainer to="/?page=1">
                     <Navbar.Brand className="logo-title">
-                        Main Page Pipols
+                        Main Page
                     </Navbar.Brand>
                 </LinkContainer>
                 <Nav>
                     <Nav.Item>
                         <LinkContainer to="/">
-                            <Nav.Link>Other Page</Nav.Link>
+                            <Nav.Link>Popular Movies</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
                         <LinkContainer to="/">
-                            <Nav.Link>Interesting stuff</Nav.Link>
+                            <Nav.Link>Polarising Movies</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
                 </Nav>
