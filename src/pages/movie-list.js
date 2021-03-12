@@ -12,7 +12,7 @@ export default class MovieListPage extends React.Component {
             page={extractSearchTerm(this.props.location.search, 'page')} 
             genres={extractGenres(this.props.location.search)}
             actualreq = {this.props.location.search}
-            req={'filteredByGenre?' + this.props.location.search.split('&').slice(1).join('&')}/>
+            req={checkgenre(this.props.location.search,extractGenres(this.props.location.search))}/>
         }
         if (extractSearchTerm(this.props.location.search, 'page') !== undefined){
             return <div className="page">
@@ -41,4 +41,13 @@ function extractGenres(str){
         }
     }
     return genres
+}
+
+function checkgenre(str,arr){
+    if (arr.length == 0){
+        console.log(str.split('&').slice(1).join('&'))
+        return str
+    }
+    console.log('filteredByGenre?' + str.split('&').slice(1).join('&'))
+    return 'filteredByGenre?' + str.split('&').slice(1).join('&')
 }

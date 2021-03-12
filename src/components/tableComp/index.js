@@ -23,7 +23,7 @@ export default class TableComp extends React.Component{
                 <tr key={movie.movieid}>
                     <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                     <td>{movie.year}</td>
-                    <td>{movie.avgrating.slice(0,4)}</td>
+                    <td>{checknull(movie.avgrating)}</td>
                     {/* <td>{movie.genre.map((genres) => {
                                     return <div><a href="#">{genres}</a> </div>
                                 })}</td> */}
@@ -36,4 +36,11 @@ export default class TableComp extends React.Component{
         </>
         )
     }
+}
+
+function checknull(avg){
+    if (avg !== null){
+        return avg.slice(0,4)
+    }
+    return 0
 }

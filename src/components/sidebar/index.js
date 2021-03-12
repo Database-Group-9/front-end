@@ -20,20 +20,33 @@ export default class Sidebar extends React.Component{
     
     applyFilter(){
         const genrearray = this.state.selectgenre
-        var q = 'filterBy=Genre&';
-        for(let i = 0; i < genrearray.length; i++ ){
-            if (i == genrearray.length -1){
-                q = q + `genre=${genrearray[i]}`
+        var q = ''
+        if (genrearray.length > 0){
+            q = q + 'filterBy=Genre&';
+            for(let i = 0; i < genrearray.length; i++ ){
+                if (i == genrearray.length -1){
+                    q = q + `genre=${genrearray[i]}`
+                }
+                else{
+                q = q + `genre=${genrearray[i]}&`
+                }
+            }
+        }
+        if (this.state.sortBy != ''){
+            if (q === ''){
+                q = q + `sortBy=${this.state.sortBy}`
             }
             else{
-            q = q + `genre=${genrearray[i]}&`
+            q = q + `&sortBy=${this.state.sortBy}`
             }
         }
-        if (this.state.sortBy !== ''){
-            q = q + `&sortBy=${this.state.sortBy}`
-        }
-        if (this.state.order !== ''){
+        if (this.state.order != ''){
+            if (q === ''){
+                q = q + `orderBy=${this.state.order}`
+            }
+            else{
             q = q + `&orderBy=${this.state.order}`
+            }
         }
         q = q + `&page=1`
         history.push(`/filter?${q}`)

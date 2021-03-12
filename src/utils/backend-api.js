@@ -18,7 +18,7 @@ const API = {
     },
 
     getFiltered: (q) =>{
-        // console.log(base_url+ 'movies/'+q)
+        console.log(base_url+ 'movies/'+q)
         return Axios.get(base_url + 'movies/'+q)
     },
 
