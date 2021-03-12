@@ -21,19 +21,21 @@ export default class Movie extends React.Component{
                 results: response.data.data,
                 ready: true,
             })
-            console.log(response.data.data[3]);
+            console.log(response.data.data[0]);
         })
     }
     
     render() {
         const results = this.state.results
         if (results === undefined){
-            return(<h1>tibe</h1>)
-            // return <></>;
+            return <></>;
         }
         const res = this.state.results
         const overview = <>
         <h1>{res[0].title} ({res[0].year})</h1>
+        <a href={'https://www.imdb.com/title/tt' + res[0].imdbid + '/'}>IMDB</a>
+        &nbsp;
+        <a href={'https://www.themoviedb.org/movie/' + res[0].tmdbid + '/'}>TMDB</a>
         <Divider/>
         <h3>Average Rating : {res[0].avgrating.slice(0, 4)} / 5.00</h3>
         <h5>Genre : </h5>
