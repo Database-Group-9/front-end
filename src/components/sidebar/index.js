@@ -8,7 +8,6 @@ export default class Sidebar extends React.Component{
         super(props);
         this.state = {
             genres: [],
-            sort: ["Alphabetical", "Year", "Average Rating"],
             sortBy: '',
             order: '',
             selectgenre: [],
@@ -93,8 +92,8 @@ export default class Sidebar extends React.Component{
                 </Nav.Item>
                     <div>
                     <Form>
-                        {this.state.sort.map((item) => {
-                            return(<Form.Check onClick={this.handleSelect.bind(this)} value={item} type='radio' name='sortby' label={item}/>)
+                        {sortby.map((item) => {
+                            return(<Form.Check onClick={this.handleSelect.bind(this)} value={item.id} type='radio' name='sortby' label={item.name}/>)
                         })}
                     </Form>
                     Sort Order:
@@ -139,3 +138,18 @@ export default class Sidebar extends React.Component{
 
 
 }
+
+const sortby = [
+    {
+        name: 'Alphabetical',
+        id: 'title'
+    },
+    {
+        name: 'Year',
+        id: 'year'
+    },
+    {
+        name: 'Average rating',
+        id: 'avgrating'
+    }
+]
