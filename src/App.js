@@ -23,6 +23,7 @@ function App() {
                     <Route component={Navbar}/>
                     <Switch>
                         <Route path="/movie" component={MoviePage}/>
+                        <Route path="/filtered" component={MoviePage}/>
                         <Route path="/" component={MovieListPage}/>
                         <Route>
                             {/* Error */}

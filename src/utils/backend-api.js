@@ -17,6 +17,11 @@ const API = {
         return Axios.get(base_url + 'movies/?page='+page)
     },
 
+    getFiltered: (q) =>{
+        // console.log(base_url+ 'movies/'+q)
+        return Axios.get(base_url + 'movies/'+q)
+    },
+
     getFake: () => {
         return fake;
     },
