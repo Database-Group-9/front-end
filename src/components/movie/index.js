@@ -1,6 +1,7 @@
 import React from 'react';
 import API from '../../utils/backend-api';
 import { Dropdown, Row, Col, Table, Container, Pagination} from 'react-bootstrap';
+import helper from '../../utils/helper'
 
 const Divider = Dropdown.Divider;
 
@@ -40,7 +41,7 @@ export default class Movie extends React.Component{
         ,
         <a href={'https://www.themoviedb.org/movie/' + res[0].tmdbid + '/'}>TMDB</a>
         <Divider/>
-        <h3>Average Rating : {res[0].avgrating.slice(0,4)} / 5.00</h3>
+        <h3>Average Rating : {helper.checknull(res[0].avgrating)} / 5.00</h3>
         <h5>Genre : </h5>
         <Table striped bordered hover variant="light">
         <tbody>
