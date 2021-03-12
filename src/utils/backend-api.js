@@ -26,8 +26,8 @@ const API = {
         return fake;
     },
 
-    getSingleMovie: () => {
-        return Axios.get(base_url + 'movie')
+    getSingleMovie: (movieId) => {
+        return Axios.get(base_url + 'movie?movieId=' + movieId)
     },
 
     getNumberOfPage: () => {
