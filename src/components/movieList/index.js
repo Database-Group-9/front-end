@@ -1,10 +1,11 @@
 import React from 'react';
-import {Table,Spinner,Pagination, ListGroupItem }from 'react-bootstrap'
+import {Table,Spinner,Pagination, ListGroupItem, Container, Row, Col }from 'react-bootstrap'
 // import Collapse from 'react-bootstrap/Collapse';
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
 // import Filter from './Filter.js'
 import './movieList.scss'
+import Sidebar from '../sidebar'
 
 export default class MovieListPage extends React.Component{
     constructor(props) {
@@ -134,39 +135,46 @@ export default class MovieListPage extends React.Component{
                     </Collapse> : null}
                 </div>
             </div>  */} 
-            <Table striped bordered hover variant="dark">
-            <thead>
-                <tr>
-                    <th>Movie Name</th>
-                    <th>Year</th>
-                    {/* <th>Genre</th> */}
-                    {/* <th>Tags</th> */}
-                </tr>
-            </thead>
-            <tbody>
-                {this.state.results.map((movie) => {
-                    return (
-                <tr key={movie.movieid}>
-                    <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
-                    <td>{movie.year}</td>
-                    {/* <td>{movie.genre.map((genres) => {
-                                    return <div><a href="#">{genres}</a> </div>
-                                })}</td> */}
-                    {/* <td>{movie.tags.map((tag) => {
-                                    return <div><a href="#">{tag} </a></div>
-                                })}</td> */}
-                </tr>)})}
-            </tbody>
-            </Table>
-            <Pagination>
-                <Pagination.First key='firstpage' onClick={this.getPageData.bind(this,1)}/>
-                <Pagination.Prev  key='prevpage' disabled={this.firstPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
-                <Pagination.Item key={1} onClick={this.getPageData.bind(this,1)}>{1}</Pagination.Item>
-                {this.getpage()}
-                <Pagination.Item key={this.state.totalPage} onClick={this.getPageData.bind(this,this.state.totalPage)}>{this.state.totalPage}</Pagination.Item>
-                <Pagination.Next key='nextpage' disabled={this.lastPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
-                <Pagination.Last key='lastpage' onClick={this.getPageData.bind(this,this.state.totalPage)}/>
-            </Pagination>
+            <Container fluid>
+                <Row>
+                    <Col xs={2}><Sidebar/></Col>
+                    <Col xs={10}>
+                        <Table striped bordered hover variant="dark">
+                        <thead>
+                            <tr>
+                                <th>Movie Name</th>
+                                <th>Year</th>
+                                {/* <th>Genre</th> */}
+                                {/* <th>Tags</th> */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.results.map((movie) => {
+                                return (
+                            <tr key={movie.movieid}>
+                                <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
+                                <td>{movie.year}</td>
+                                {/* <td>{movie.genre.map((genres) => {
+                                                return <div><a href="#">{genres}</a> </div>
+                                            })}</td> */}
+                                {/* <td>{movie.tags.map((tag) => {
+                                                return <div><a href="#">{tag} </a></div>
+                                            })}</td> */}
+                            </tr>)})}
+                        </tbody>
+                        </Table>
+                        <Pagination>
+                            <Pagination.First key='firstpage' onClick={this.getPageData.bind(this,1)}/>
+                            <Pagination.Prev  key='prevpage' disabled={this.firstPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) - 1)} />
+                            <Pagination.Item key={1} onClick={this.getPageData.bind(this,1)}>{1}</Pagination.Item>
+                            {this.getpage()}
+                            <Pagination.Item key={this.state.totalPage} onClick={this.getPageData.bind(this,this.state.totalPage)}>{this.state.totalPage}</Pagination.Item>
+                            <Pagination.Next key='nextpage' disabled={this.lastPage(this)} onClick={this.getPageData.bind(this, parseInt(this.state.page) + 1)}/>
+                            <Pagination.Last key='lastpage' onClick={this.getPageData.bind(this,this.state.totalPage)}/>
+                        </Pagination>
+                    </Col>
+                </Row>
+            </Container>
         </div>}
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }
