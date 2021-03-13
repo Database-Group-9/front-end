@@ -2,6 +2,7 @@ import React from 'react';
 import API from '../../utils/backend-api';
 import { Dropdown, Row, Col, Table, Container, Pagination} from 'react-bootstrap';
 import helper from '../../utils/helper'
+import Charts from '../chart'
 
 const Divider = Dropdown.Divider;
 
@@ -16,23 +17,28 @@ export default class Movie extends React.Component{
     }
     
     getData(){
-        console.log(this.props.movieId)
+        // console.log(this.props.movieId)
         API.getSingleMovie(this.props.movieId).then((response) =>{
             this.setState({
                 results: response.data.data,
                 ready: true,
             })
-            console.log(response.data.data[0]);
+            // console.log(response.data.data[0]);
         })
     }
     
     render() {
-        console.log(this.state.results)
+        // console.log(this.state.results)
         const results = this.state.results
         if (results === undefined){
             return <></>;
         }
+
         const res = this.state.results
+
+        const yvalue = res[3].ratings.map((item) => parseInt(item[1]))
+        const xvalue = res[3].ratings.map((item) => item[0])
+        // console.log(xvalue)
         const overview = <>
         <h1>{res[0].title} ({res[0].year})</h1>
         External Link: 
@@ -80,6 +86,7 @@ export default class Movie extends React.Component{
             <Row>
                 <Col>
                     {overview}
+                    <Charts id='myChart' labels={xvalue} data={yvalue}/>
                 </Col>
             </Row>
             </Container>
