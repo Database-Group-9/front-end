@@ -1,8 +1,9 @@
 function checknull(avg){
     if (avg !== null){
-        return avg.slice(0,4)
+        const a = avg.slice(0,4) 
+        return a + "/ 5.00"
     }
-    return 0
+    return "not rated"
 }
 
 module.exports ={ 

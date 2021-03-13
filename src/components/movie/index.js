@@ -41,13 +41,13 @@ export default class Movie extends React.Component{
         ,
         <a href={'https://www.themoviedb.org/movie/' + res[0].tmdbid + '/'}>TMDB</a>
         <Divider/>
-        <h3>Average Rating : {helper.checknull(res[0].avgrating)} / 5.00</h3>
+        <h3>Average Rating : {helper.checknull(res[0].avgrating)}</h3>
         <h5>Genre : </h5>
         <Table striped bordered hover variant="light">
         <tbody>
                 <tr>
                     <td>{res[2].genres.map((genre) => {
-                                    return <div><a href="#">{genre} </a></div>
+                                    return <div><a href="">{genre} </a></div>
                                 })}</td>
                 </tr>
             </tbody>
