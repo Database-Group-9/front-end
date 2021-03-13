@@ -75,7 +75,7 @@ export default class Movie extends React.Component{
                 </tr>
             </tbody>
         </Table>
-        <h5>Ratings : </h5>
+        {/* <h5>Ratings : </h5>
         <Table striped bordered hover variant="light">
         <tbody>
                 <tr>
@@ -84,7 +84,7 @@ export default class Movie extends React.Component{
                                 })}</td>
                 </tr>
             </tbody>
-        </Table>
+        </Table> */}
         <Divider/>
         </>
         return( 
@@ -93,6 +93,7 @@ export default class Movie extends React.Component{
             <Row>
                 <Col>
                     {overview}
+                    <h4>Stats:</h4>
                     <Charts id='myChart' labels={xvalue} data={yvalue} name={"Number of Raters"}/>
                     <Charts id='myChart' labels={xvalue2} data={yvalue2} name={"Percentage of Like/Dislike (%)"}/>
                     <Charts id='myChart' labels={xvalue3} data={yvalue3} name={"Enjoyment of Movie Compared to Other Movies (%)"}/>

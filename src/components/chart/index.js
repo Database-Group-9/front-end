@@ -34,6 +34,7 @@ export default class Charts extends React.Component{
             <canvas
                 id={this.props.id}
                 ref={this.chartRef}
+                height="75px"
             />
         </>
     }
