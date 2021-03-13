@@ -15,7 +15,7 @@ export default class Charts extends React.Component{
                 labels: this.props.labels,
                 datasets:[
                     {
-                        label:"number of raters",
+                        label:this.props.name,
                         data: this.props.data,
                         fill: true,
                         borderWidth: 1.5,

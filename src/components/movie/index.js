@@ -23,7 +23,7 @@ export default class Movie extends React.Component{
                 results: response.data.data,
                 ready: true,
             })
-            // console.log(response.data.data[0]);
+            console.log(response.data.data[4]);
         })
     }
     
@@ -38,13 +38,20 @@ export default class Movie extends React.Component{
 
         const yvalue = res[3].ratings.map((item) => parseInt(item[1]))
         const xvalue = res[3].ratings.map((item) => item[0])
-        // console.log(xvalue)
+
+        const xvalue2 = ["Like", "Dislike"]
+        const yvalue2 = Object.entries(res[4]).slice(0,2).map(entry => entry[1]);
+
+        const xvalue3 = ["Positive", "Neutral", "Negative"]
+        const yvalue3 = Object.entries(res[4]).slice(2,5).map(entry => entry[1]);
+
         const overview = <>
         <h1>{res[0].title} ({res[0].year})</h1>
-        External Link: 
-        <a href={'https://www.imdb.com/title/tt' + res[0].imdbid + '/'}>IMDB</a>
+        External Link : 
         &nbsp;
+        <a href={'https://www.imdb.com/title/tt' + res[0].imdbid + '/'}>IMDB</a>
         ,
+        &nbsp;
         <a href={'https://www.themoviedb.org/movie/' + res[0].tmdbid + '/'}>TMDB</a>
         <Divider/>
         <h3>Average Rating : {helper.checknull(res[0].avgrating)}</h3>
@@ -86,7 +93,9 @@ export default class Movie extends React.Component{
             <Row>
                 <Col>
                     {overview}
-                    <Charts id='myChart' labels={xvalue} data={yvalue}/>
+                    <Charts id='myChart' labels={xvalue} data={yvalue} name={"Number of Raters"}/>
+                    <Charts id='myChart' labels={xvalue2} data={yvalue2} name={"Percentage of Like/Dislike (%)"}/>
+                    <Charts id='myChart' labels={xvalue3} data={yvalue3} name={"Enjoyment of Movie Compared to Other Movies (%)"}/>
                 </Col>
             </Row>
             </Container>
