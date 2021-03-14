@@ -111,8 +111,8 @@ export default class Sidebar extends React.Component{
                     </Form>
                     Sort Order:
                     <Form>
-                        <Form.Check onClick={this.handleSelectOrder.bind(this)} value='asc' type='radio' name='sorttype' label="ascending"/>
-                        <Form.Check onClick={this.handleSelectOrder.bind(this)} value='desc' type='radio' name='sorttype' label="descending"/>
+                        <Form.Check onClick={this.handleSelectOrder.bind(this)} value='asc' type='radio' name='sorttype' label="Ascending"/>
+                        <Form.Check onClick={this.handleSelectOrder.bind(this)} value='desc' type='radio' name='sorttype' label="Descending"/>
                     </Form>
                     </div>
                 
