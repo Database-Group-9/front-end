@@ -22,6 +22,11 @@ export default class Header extends React.Component{
                             <Nav.Link>Polarising Movies</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
+                    <Nav.Item>
+                        <LinkContainer to="/">
+                            <Nav.Link>Movies Prediction</Nav.Link>
+                        </LinkContainer>
+                    </Nav.Item>
                 </Nav>
                 <Nav className='mr-auto'></Nav>
                 <Container className="search-container">
