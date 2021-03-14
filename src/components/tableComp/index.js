@@ -28,12 +28,6 @@ export default class TableComp extends React.Component{
                             <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                             <td>{movie.year}</td>
                             <td>{helper.checknull(movie.avgrating)}</td>
-                            {/* <td>{movie.genre.map((genres) => {
-                                            return <div><a href="#">{genres}</a> </div>
-                                        })}</td> */}
-                            {/* <td>{movie.tags.map((tag) => {
-                                            return <div><a href="#">{tag} </a></div>
-                                        })}</td> */}
                         </tr>)})}
                     </tbody>
                     </Table>
@@ -58,12 +52,6 @@ export default class TableComp extends React.Component{
                         <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                         <td>{movie.year}</td>
                         <td>{helper.checknull(movie.avgrating)}</td>
-                        {/* <td>{movie.genre.map((genres) => {
-                                        return <div><a href="#">{genres}</a> </div>
-                                    })}</td> */}
-                        {/* <td>{movie.tags.map((tag) => {
-                                        return <div><a href="#">{tag} </a></div>
-                                    })}</td> */}
                     </tr>)})}
                 </tbody>
                 </Table>
@@ -72,10 +60,3 @@ export default class TableComp extends React.Component{
         }
     }
 }
-
-// function checknull(avg){
-//     if (avg !== null){
-//         return avg.slice(0,4)
-//     }
-//     return 0
-// }
