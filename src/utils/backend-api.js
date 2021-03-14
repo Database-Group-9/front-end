@@ -8,19 +8,14 @@ const API = {
     },
 
     getMovies: (page) => {
-        // if(filterBy === 'title'){
-        //     console.log(base_url + + 'movies?filterBy='+filterBy+'&filter='+title)
-        //     return Axios.get(base_url + `movies?filterBy=${filterBy}&filter=${title}`)
-        // }
-        // if (page ===undefined){
-        //     page =1
-        // }
-        console.log(base_url + 'movies'+page)
+        if (page ===undefined){
+            page ='?page=1'
+        }
         return Axios.get(base_url + 'movies'+page)
     },
 
     getFiltered: (q) =>{
-        console.log(base_url+ 'movies/filtered'+q)
+        // console.log(base_url+ 'movies/filtered'+q)
         return Axios.get(base_url + 'movies/filtered'+q)
     },
 

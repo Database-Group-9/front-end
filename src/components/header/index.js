@@ -18,13 +18,13 @@ export default class Header extends React.Component{
     }
 
     handleStartSearching(){
-        console.log(this.state.term)
+        // console.log(this.state.term)
         history.push(`/?filterBy=title&filter=${this.state.term}`)
     }
 
     handleclick(e){
         if(e.code === 'Enter'){
-            console.log(this.state.term)
+            history.push(`/?filterBy=title&filter=${this.state.term}`)
         }
     }
     render() {
