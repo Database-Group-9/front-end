@@ -36,6 +36,20 @@ const API = {
 
     getGenre: () => {
         return Axios.get(base_url + 'genres')
+    },
+
+    getPopularMovies: (page) => {
+        if (page ===undefined){
+            page =1
+        }
+        return Axios.get(base_url + 'movies/popular?page='+page)
+    },
+
+    getPolarisingMovies: (page) => {
+        if (page ===undefined){
+            page =1
+        }
+        return Axios.get(base_url + 'movies/polarising?page='+page)
     }
 }
 

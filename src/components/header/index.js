@@ -13,12 +13,12 @@ export default class Header extends React.Component{
                 </LinkContainer>
                 <Nav>
                     <Nav.Item>
-                        <LinkContainer to="/">
+                        <LinkContainer to="/popular/?page=1">
                             <Nav.Link>Popular Movies</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <LinkContainer to="/">
+                        <LinkContainer to="/polarising/?page=1">
                             <Nav.Link>Polarising Movies</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
