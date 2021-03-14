@@ -16,6 +16,7 @@ export default class MovieListPage extends React.Component{
             results: [], 
             ready:false, 
             page:1,
+            req:props.req,
             years: [],
             startyear:undefined,
             stopyear:undefined,
@@ -71,11 +72,13 @@ export default class MovieListPage extends React.Component{
     }
 
     changepage(){
-        if (this.props.page !== this.state.page) {
-            API.getMovies(this.props.page,this.props.filterBy,this.props.filter).then((response) => {
+        if (this.props.req !== this.state.req) {
+            API.getMovies(this.props.req).then((response) => {
                 this.setState({
                     results: response.data.data,
                     ready: true,
+                    req: this.props.req,
+                    totalPage: response.data.meta.totalPage,
                     page: this.props.page,
                 });
             });
@@ -83,6 +86,7 @@ export default class MovieListPage extends React.Component{
     }
  
     render() {
+        console.log(this.state)
         if (this.state.ready) {
         return <div>
             <Container fluid>

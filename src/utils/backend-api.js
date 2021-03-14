@@ -12,10 +12,11 @@ const API = {
         //     console.log(base_url + + 'movies?filterBy='+filterBy+'&filter='+title)
         //     return Axios.get(base_url + `movies?filterBy=${filterBy}&filter=${title}`)
         // }
-        if (page ===undefined){
-            page =1
-        }
-        return Axios.get(base_url + 'movies/?page='+page)
+        // if (page ===undefined){
+        //     page =1
+        // }
+        console.log(base_url + 'movies'+page)
+        return Axios.get(base_url + 'movies'+page)
     },
 
     getFiltered: (q) =>{

@@ -9,7 +9,8 @@ export default class MovieListPage extends React.Component {
             return <div className="page">
                 <MovieList 
                     path={this.props.location.pathname} 
-                    page={extractSearchTerm(this.props.location.search, 'page')}/>
+                    page={extractSearchTerm(this.props.location.search, 'page')}
+                    req = {this.props.location.search}/>
             </div>;
         }
         else {
