@@ -99,9 +99,16 @@ export default class ReportedMovieListPage extends React.Component{
             <Container fluid>
                 <Row>
                     {this.props.settings==='popular' ? 
-                    <h3>Most Popular Movies</h3>: <h3>Most Polarising Movies</h3>
+                    <div><h3 style={{display: 'inline'}}>Most Popular Movies</h3> 
+                    &nbsp; 
+                    <h5 style={{display: 'inline'}}>(Based on Number of Ratings)</h5>
+                    </div>: 
+                    <div><h3 style={{display: 'inline'}}>Most Polarising Movies</h3>
+                    &nbsp;
+                    <h5 style={{display: 'inline'}}>(Based on Standard Deviation of Ratings for Movies with More Than 20 Reviews)</h5>
+                    </div>
                     }
-                    <TableComp movies={this.state.results} ranking={true} page={this.state.page}/>
+                    <TableComp movies={this.state.results} ranking={true} page={this.state.page} popular={this.props.settings === 'popular'? true : false}/>
                     <PageBar page={this.state.page} totalPage={this.state.totalPage} getPageData={this.getPageData.bind(this)}/>
                 </Row>
             </Container>
