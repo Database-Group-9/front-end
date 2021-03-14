@@ -3,12 +3,11 @@ import {Table,Spinner, ListGroupItem, Container, Row, Col }from 'react-bootstrap
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
 import TableComp from '../tableComp'
-// import Filter from './Filter.js'
-import './movieList.scss'
 import Sidebar from '../sidebar'
 import PageBar from '../pageBar';
+import helper from '../../utils/helper'
 
-export default class MovieListPage extends React.Component{
+export default class Filtered extends React.Component{
     constructor(props) {
         super(props);
 
@@ -16,26 +15,28 @@ export default class MovieListPage extends React.Component{
             results: [], 
             ready:false, 
             page:1,
+            genres: [],
             years: [],
             startyear:undefined,
             stopyear:undefined,
-            genres: [],
+            req:undefined,
             totalPage:undefined,
         };
-        this.getGenre(); 
-        this.getData();   
+        this.getGenre();
+        this.getData();
         this.getYear();
-            
+
+        
     }
 
     getData(){
-        API.getMovies().then((response) =>{
+        API.getFiltered(this.props.req).then((response) => {
             this.setState({
                 results: response.data.data,
+                req: this.props.req,
                 totalPage: response.data.meta.totalPage,
                 ready: true,
             })
-            // console.log(response)
         })
     }
 
@@ -61,9 +62,8 @@ export default class MovieListPage extends React.Component{
         console.log(i)
         if (i != this.state.page){
             this.setState({ready: false});
-            history.push(`/?page=${i}`);
+            history.push('/filtered'+helper.updatePage(this.props.req ,i))
         }
-        
     }
 
     componentDidUpdate(){
@@ -71,18 +71,21 @@ export default class MovieListPage extends React.Component{
     }
 
     changepage(){
-        if (this.props.page !== this.state.page) {
-            API.getMovies(this.props.page,this.props.filterBy,this.props.filter).then((response) => {
+        if (this.props.req !== this.state.req){
+            API.getFiltered(this.props.req).then((response) => {
                 this.setState({
                     results: response.data.data,
-                    ready: true,
+                    totalPage: response.data.meta.totalPage,
+                    req: this.props.req,
                     page: this.props.page,
-                });
-            });
+                    ready: true,
+                })
+            })
         }
     }
  
     render() {
+        console.log(this.state)
         if (this.state.ready) {
         return <div>
             <Container fluid>
@@ -98,3 +101,4 @@ export default class MovieListPage extends React.Component{
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }
 }
+

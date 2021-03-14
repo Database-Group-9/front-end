@@ -16,6 +16,7 @@ import PopularMoviesPage from './pages/popular-movies';
 import PolarisingMoviesPage from './pages/polarising-movies';
 import history from './utils/history'
 import Navbar from './components/header'
+import filteredPage from './pages/filtered'
 
 function App() {
     return (
@@ -27,7 +28,7 @@ function App() {
                         <Route path="/polarising" component={PolarisingMoviesPage}/>
                         <Route path="/popular" component={PopularMoviesPage}/>
                         <Route path="/movie" component={MoviePage}/>
-                        <Route path="/filtered" component={MoviePage}/>
+                        <Route path="/filtered" component={filteredPage}/>
                         <Route path="/" component={MovieListPage}/>
                         <Route>
                             {/* Error */}

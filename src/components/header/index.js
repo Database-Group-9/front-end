@@ -1,8 +1,32 @@
 import React from 'react';
 import { Navbar, Nav, Form, Container, Button, Modal} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import history from '../../utils/history'
 
 export default class Header extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            term: undefined,
+        }
+    }
+
+    handleChange(e){
+        this.setState({
+            term: e
+        })
+    }
+
+    handleStartSearching(){
+        console.log(this.state.term)
+        history.push(`/?filterBy=title&filter=${this.state.term}`)
+    }
+
+    handleclick(e){
+        if(e.code === 'Enter'){
+            console.log(this.state.term)
+        }
+    }
     render() {
         return <>
                     <Navbar className="navbar" variant="light">
@@ -32,14 +56,12 @@ export default class Header extends React.Component{
                 <Container className="search-container">
                     <Form.Control
                         className="search-bar"
-                        placeholder="Search..."
-                        // value={getSearchTerm(this.props.location.search)}
-                        // onClick={this.handleStartSearching.bind(this)}
-                        // onFocus={this.handleStartSearching.bind(this)}
-                        // onChange={() => {}}
+                        placeholder="Enter movie name"
+                        onKeyDown={e => this.handleclick(e)} 
+                        onInput={e => this.handleChange(e.target.value)}
                         // ref={this.search}
                     />
-                    <Button variant="primary" type="submit" className='ml-3'>
+                    <Button variant="primary" type="submit" onClick={this.handleStartSearching.bind(this)} className='ml-3'>
                         Submit
                     </Button>
                 </Container>

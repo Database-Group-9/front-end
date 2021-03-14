@@ -21,21 +21,11 @@ export default class PageBar extends React.Component{
         return false
     }
 
-    forward(){
-        if (this.props.totalPage == 0){
-            this.props.getPageData.bind(this,1)
-        }
-        else{
-            this.props.getPageData.bind(this,this.props.totalPage)
-        }
-    }
-
     displaylast(){
         if (this.props.totalPage > 3){
             return <Pagination.Item key={this.props.totalPage} onClick={this.props.getPageData.bind(this,this.props.totalPage)}>{this.props.totalPage}</Pagination.Item>
         }
     }
-
 
     getpage = () => {
         const maxpage = parseInt(this.props.totalPage)
@@ -70,7 +60,7 @@ export default class PageBar extends React.Component{
     }
 
     render(){
-        console.log(this.props.totalPage)
+        // console.log(this.props.totalPage)
         return(
         <>
         <Pagination>
@@ -80,7 +70,7 @@ export default class PageBar extends React.Component{
             {this.getpage()}
             {this.displaylast()}
             <Pagination.Next key='nextpage' disabled={this.lastPage(this)} onClick={this.props.getPageData.bind(this,parseInt(this.props.page) + 1)}/>
-            <Pagination.Last key='lastpage' onClick={this.forward.bind(this)}/>
+            <Pagination.Last key='lastpage' onClick={this.props.totalPage == 0 ? this.props.getPageData.bind(this,1) : this.props.getPageData.bind(this,this.props.totalPage)}/>
         </Pagination>
         </>
         )

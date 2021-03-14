@@ -6,6 +6,15 @@ function checknull(avg){
     return "not rated"
 }
 
+function updatePage(str,i){
+    const arr = str.split('&')
+    arr.pop()
+    arr.push(`page=${i}`)
+    const returnq = arr.join('&')
+    return returnq
+}
+
 module.exports ={ 
     checknull,
+    updatePage,
 }
