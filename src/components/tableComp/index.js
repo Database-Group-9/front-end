@@ -17,8 +17,8 @@ export default class TableComp extends React.Component{
                             <th>Ranking</th>
                             <th>Movie Name</th>
                             <th>Year</th>
-                            <th>Rating</th>
-                            {this.props.popular ? <th>No. of Ratings</th>: <th>Standard Deviation</th>}
+                            <th>Raters</th>
+                            {this.props.popular ? <th>No. of Raters</th>: <th>Standard Deviation</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +29,7 @@ export default class TableComp extends React.Component{
                             <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                             <td>{movie.year}</td>
                             <td>{helper.checknull(movie.avgrating)}</td>
+                            {this.props.popular ? <td>{movie.noofratings}</td>: <td>{(movie.std).toFixed(4)}</td>}
                         </tr>)})}
                     </tbody>
                     </Table>

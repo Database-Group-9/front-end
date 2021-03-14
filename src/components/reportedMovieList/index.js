@@ -101,7 +101,7 @@ export default class ReportedMovieListPage extends React.Component{
                     {this.props.settings==='popular' ? 
                     <div><h3 style={{display: 'inline'}}>Most Popular Movies</h3> 
                     &nbsp; 
-                    <h5 style={{display: 'inline'}}>(Based on Number of Ratings)</h5>
+                    <h5 style={{display: 'inline'}}>(Based on Number of users who rate the movie)</h5>
                     </div>: 
                     <div><h3 style={{display: 'inline'}}>Most Polarising Movies</h3>
                     &nbsp;
