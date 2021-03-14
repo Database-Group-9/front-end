@@ -18,6 +18,7 @@ export default class TableComp extends React.Component{
                             <th>Movie Name</th>
                             <th>Year</th>
                             <th>Rating</th>
+                            {this.props.popular ? <th>No. of Ratings</th>: <th>Standard Deviation</th>}
                         </tr>
                     </thead>
                     <tbody>
