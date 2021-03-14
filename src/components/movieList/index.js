@@ -3,8 +3,6 @@ import {Table,Spinner, ListGroupItem, Container, Row, Col }from 'react-bootstrap
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
 import TableComp from '../tableComp'
-// import Filter from './Filter.js'
-import './movieList.scss'
 import Sidebar from '../sidebar'
 import PageBar from '../pageBar';
 
