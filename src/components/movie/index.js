@@ -49,6 +49,9 @@ export default class Movie extends React.Component{
         <h1>{res[0].title} ({res[0].year})</h1>
         External Link : 
         &nbsp;
+        <a href={'https://movielens.org/movies/' + res[0].movieid + '/'}>MovieLens</a>
+        ,
+        &nbsp;
         <a href={'https://www.imdb.com/title/tt' + res[0].imdbid + '/'}>IMDB</a>
         ,
         &nbsp;

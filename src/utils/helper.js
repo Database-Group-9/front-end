@@ -1,6 +1,6 @@
 function checknull(avg){
     if (avg !== null){
-        const a = avg.slice(0,4) 
+        const a = avg.toString().slice(0,4) 
         return a + "/ 5.00"
     }
     return "not rated"
