@@ -37,6 +37,7 @@ export default class TableComp extends React.Component{
                 <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
+                        {this.props.ranking ? <th>ranking</th>:<></>}
                         <th>Movie Name</th>
                         <th>Year</th>
                         <th>Rating</th>
@@ -44,9 +45,10 @@ export default class TableComp extends React.Component{
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.movies.map((movie) => {
+                    {this.props.movies.map((movie,i) => {
                         return (
                     <tr key={movie.movieid}>
+                        {this.props.ranking ? <td>{(this.props.page-1) * 20 + i + 1}</td>:<></>}
                         <td><a href={"/movie?movieid="+movie.movieid}>{movie.title}</a></td>
                         <td>{movie.year}</td>
                         <td>{helper.checknull(movie.avgrating)}</td>
