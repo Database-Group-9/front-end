@@ -108,7 +108,6 @@ export default class Movie extends React.Component{
                         return(
                            <h6>{item[1]}: {item[0]} / 5.00</h6>
                         );
-                        console.log(item[0])
                     })}
                 </Col>
             </Row>
