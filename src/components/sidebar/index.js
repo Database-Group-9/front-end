@@ -140,7 +140,7 @@ export default class Sidebar extends React.Component{
                 </Nav.Item>
                     <div>
                     <Dropdown>
-                        <Dropdown.Toggle variant="primary" style={{ maxHeight: "28px" }} id="dropdown-basic">
+                        <Dropdown.Toggle variant="primary" style={{ maxHeight: "50px"}} id="dropdown-basic">
                             From
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -150,7 +150,7 @@ export default class Sidebar extends React.Component{
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown>
-                        <Dropdown.Toggle variant="primary" style={{ maxHeight: "28px" }} id="dropdown-basic">
+                        <Dropdown.Toggle variant="primary" style={{ maxHeight: "50px" }} id="dropdown-basic">
                             To
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -160,7 +160,7 @@ export default class Sidebar extends React.Component{
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>
-
+                    <br/>
                 <Nav.Item>
                     <Button onClick={this.applyFilter.bind(this)}>Apply</Button>
                 </Nav.Item>

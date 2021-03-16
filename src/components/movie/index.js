@@ -23,7 +23,7 @@ export default class Movie extends React.Component{
                 results: response.data.data,
                 ready: true,
             })
-            console.log(response.data.data[4]);
+            // console.log(response.data.data[4]);
         })
     }
     
@@ -44,6 +44,9 @@ export default class Movie extends React.Component{
 
         const xvalue3 = ["Positive", "Neutral", "Negative"]
         const yvalue3 = Object.entries(res[4]).slice(2,5).map(entry => entry[1]);
+
+        const xvalue4 = res[5]["tag_ratings"].map((item) => item[1]);
+        const yvalue4 = res[5]["tag_ratings"].map((item) => item[0]);
 
         const overview = <>
         <h1>{res[0].title} ({res[0].year})</h1>
@@ -100,6 +103,12 @@ export default class Movie extends React.Component{
                     <Charts id='myChart' labels={xvalue} data={yvalue} name={"Number of Raters"}/>
                     <Charts id='myChart' labels={xvalue2} data={yvalue2} name={"Percentage of Like/Dislike (%)"}/>
                     <Charts id='myChart' labels={xvalue3} data={yvalue3} name={"Enjoyment of Movie Compared to Other Movies (%)"}/>
+                    <h5>Average Rating by Tag:</h5>
+                    {res[5]["tag_ratings"].map((item) => {
+                        return(
+                           <h6>{item[1]}: {item[0]} / 5.00</h6>
+                        );
+                    })}
                 </Col>
             </Row>
             </Container>
