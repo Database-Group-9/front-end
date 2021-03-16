@@ -104,7 +104,6 @@ export default class Movie extends React.Component{
                     <Charts id='myChart' labels={xvalue2} data={yvalue2} name={"Percentage of Like/Dislike (%)"}/>
                     <Charts id='myChart' labels={xvalue3} data={yvalue3} name={"Enjoyment of Movie Compared to Other Movies (%)"}/>
                     <h5>Average Rating by Tag:</h5>
-                    {console.log(res[5]["tag_ratings"])}
                     {res[5]["tag_ratings"].map((item) => {
                         return(
                            <h6>{item[1]}: {item[0]} / 5.00</h6>
