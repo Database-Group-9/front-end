@@ -17,6 +17,7 @@ import PolarisingMoviesPage from './pages/polarising-movies';
 import history from './utils/history'
 import Navbar from './components/header'
 import filteredPage from './pages/filtered'
+import PredictPage from './pages/predict'
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                     <Route component={Navbar}/>
                     <Switch>
                         <Route path="/polarising" component={PolarisingMoviesPage}/>
+                        <Route path="/predict" component={PredictPage}/>
                         <Route path="/popular" component={PopularMoviesPage}/>
                         <Route path="/movie" component={MoviePage}/>
                         <Route path="/filtered" component={filteredPage}/>

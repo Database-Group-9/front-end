@@ -47,7 +47,7 @@ export default class Header extends React.Component{
                         </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <LinkContainer to="/">
+                        <LinkContainer to="/predict">
                             <Nav.Link>Movies Prediction</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
