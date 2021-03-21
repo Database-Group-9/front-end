@@ -18,7 +18,6 @@ export default class Header extends React.Component{
     }
 
     handleStartSearching(){
-        // console.log(this.state.term)
         history.push(`/?filterBy=title&filter=${this.state.term}`)
     }
 

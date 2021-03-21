@@ -21,10 +21,15 @@ export default class MovieListPage extends React.Component{
             genres: [],
             totalPage:undefined,
         };
-        this.getGenre(); 
-        this.getData();   
-        this.getYear();
+        this.getYear(); 
+        this.getGenre();  
             
+        if (props.title === 1){
+            this.getfilter()
+        }
+        else{
+            this.getData(); 
+        }
     }
 
     getData(){
@@ -71,6 +76,19 @@ export default class MovieListPage extends React.Component{
         this.changepage();
     }
 
+    getfilter(){
+        API.getMovies(this.props.req).then((response) => {
+            this.setState({
+                results: response.data.data,
+                ready: true,
+                req: this.props.req,
+                totalPage: response.data.meta.totalPage,
+                page: this.props.page,
+            });
+        });
+    }
+
+
     changepage(){
         if (this.props.req !== this.state.req) {
             API.getMovies(this.props.req).then((response) => {
@@ -86,6 +104,7 @@ export default class MovieListPage extends React.Component{
     }
  
     render() {
+        console.log(this.props.title)
         if (this.state.ready) {
         return <div>
             <Container fluid>
