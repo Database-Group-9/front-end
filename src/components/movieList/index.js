@@ -108,18 +108,6 @@ export default class MovieListPage extends React.Component{
         console.log(this.state)
         if (this.state.ready) {
         return <div>
-            <Container className="search-container">
-                    <Form.Control
-                        className="search-bar"
-                        placeholder="Enter movie name"
-                        onKeyDown={e => this.handleclick(e)} 
-                        onInput={e => this.handleChange(e.target.value)}
-                        // ref={this.search}
-                    />
-                    <Button variant="primary" type="submit" onClick={this.handleStartSearching.bind(this)} className='ml-3'>
-                        Submit
-                    </Button>
-                </Container>
             <Container fluid>
                 <Row>
                     <Col xs={2}><Sidebar genres={this.state.genres} years={this.state.years} startyear={this.state.startyear} stopyear={this.state.stopyear}/></Col>
