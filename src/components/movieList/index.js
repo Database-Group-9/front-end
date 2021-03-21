@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table,Spinner, ListGroupItem, Container, Row, Col }from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap';
 import history from '../../utils/history'
 import API from '../../utils/backend-api'
 import TableComp from '../tableComp'
@@ -102,11 +103,42 @@ export default class MovieListPage extends React.Component{
             });
         }
     }
+
+    
+    handleChange(e){
+        this.setState({
+            term: e
+        })
+    }
+
+    handleStartSearching(){
+        // console.log(this.state.term)
+        history.push(`/?filterBy=title&filter=${this.state.term}`)
+    }
+
+    handleclick(e){
+        if(e.code === 'Enter'){
+            history.push(`/?filterBy=title&filter=${this.state.term}`)
+        }
+    }
+
  
     render() {
         console.log(this.props.title)
         if (this.state.ready) {
         return <div>
+            <Container className="search-container">
+                    <Form.Control
+                        className="search-bar"
+                        placeholder="Enter movie name"
+                        onKeyDown={e => this.handleclick(e)} 
+                        onInput={e => this.handleChange(e.target.value)}
+                        // ref={this.search}
+                    />
+                    <Button variant="primary" type="submit" onClick={this.handleStartSearching.bind(this)} className='ml-3'>
+                        Submit
+                    </Button>
+                </Container>
             <Container fluid>
                 <Row>
                     <Col xs={2}><Sidebar genres={this.state.genres} years={this.state.years} startyear={this.state.startyear} stopyear={this.state.stopyear}/></Col>

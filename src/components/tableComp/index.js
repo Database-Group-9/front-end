@@ -37,7 +37,7 @@ export default class TableComp extends React.Component{
                 <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
-                        {this.props.ranking ? <th>ranking</th>:<></>}
+                        {this.props.ranking ? <th>Ranking</th>:<></>}
                         <th>Movie Name</th>
                         <th>Year</th>
                         <th>Rating</th>

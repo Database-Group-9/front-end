@@ -52,18 +52,6 @@ export default class Header extends React.Component{
                     </Nav.Item>
                 </Nav>
                 <Nav className='mr-auto'></Nav>
-                <Container className="search-container">
-                    <Form.Control
-                        className="search-bar"
-                        placeholder="Enter movie name"
-                        onKeyDown={e => this.handleclick(e)} 
-                        onInput={e => this.handleChange(e.target.value)}
-                        // ref={this.search}
-                    />
-                    <Button variant="primary" type="submit" onClick={this.handleStartSearching.bind(this)} className='ml-3'>
-                        Submit
-                    </Button>
-                </Container>
             </Navbar>
             </>;
     }
