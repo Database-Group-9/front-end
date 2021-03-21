@@ -1,8 +1,12 @@
 import React from 'react'
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col,Dropdown } from 'react-bootstrap';
 import './predict.scss'
 import Select from 'react-select'
 import API from '../../utils/backend-api'
+import history from '../../utils/history'
+
+const Divider = Dropdown.Divider;
+
 export default class Predict extends React.Component{
     constructor(props){
     super(props)
@@ -48,9 +52,48 @@ export default class Predict extends React.Component{
         })
     }
 
-    render(){
+    predictPersonality(){
+        const st = this.state.selectedTags
+        var q = ''
+        for (let i = 0; i < st.length; i++){
+            if (i > 0){
+                q = q + '&'
+            }
+            q = q + 'tag=' + st[i]
+        }
+        API.getPersonalityPredictions(q).then((response) =>{
+            console.log(response)
+        })
+        
+    }
+
+    predictRating(){
         console.log(this.state)
+        const st = this.state.selectedTags
+        const sg = this.state.selectedGenres
+        var q = ''
+        for (let i = 0; i < st.length; i++){
+            if (i > 0){
+                q = q + '&'
+            }
+            q = q + 'tag=' + st[i]
+        }
+        if (sg.length > 0){
+            q = q + '&'
+        }
+        for (let i = 0; i < sg.length; i++){
+            if (i > 0){
+                q = q + '&'
+            }
+            q = q + 'genreId=' + sg[i]
+        }
+        API.getRatingPredictions(q).then((response) =>{
+            console.log(response)
+        })
+    }
+    render(){
         return(
+            <div>
             <div className="form">
                 <Form>{/* <Form onSubmit={e=> this.handleSubmit(e)}> */}
                     <Form.Group controlId="Title" className="title">
@@ -77,9 +120,14 @@ export default class Predict extends React.Component{
                         </Form.Group>
                         </Col>
                     </Form.Row>                   
-                    <Button className="button" variant="primary" type="submit">Predict personality</Button>
-                    <Button className="button" variant="primary" type="submit">Predict rating</Button>
+                    <Button className="button" variant="primary" type="button" onClick={this.predictPersonality.bind(this)}>Predict personality</Button>
+                    <Button className="button" variant="primary" type="button" onClick={this.predictRating.bind(this)}>Predict rating</Button>
                 </Form>
+            </div>
+            <div>
+            <Divider/>
+                <h5>Prediction Results:</h5>
+            </div>
             </div>
         )}
 }

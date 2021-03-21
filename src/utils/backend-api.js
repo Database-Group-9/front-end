@@ -39,6 +39,14 @@ const API = {
         return Axios.get(base_url + 'years')
     },
 
+    getRatingPredictions: (data) =>{
+        return Axios.get(base_url + 'predict/ratings?' + data)
+    },
+
+    getPersonalityPredictions: (data) =>{
+        return Axios.get(base_url + 'predict/personality?' + data)
+    },
+
     getPopularMovies: (page) => {
         if (page ===undefined){
             page =1
