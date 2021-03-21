@@ -48,8 +48,10 @@ export default class Sidebar extends React.Component{
             q = q + `&orderBy=${this.state.order}`
             }
         }
-        q = q + `&years=${this.state.startyear}`
-        q = q + `&years=${this.state.stopyear}`
+        if (this.state.startyear !== undefined){
+            q = q + `&years=${this.state.startyear}`}
+        if (this.state.stopyear !== undefined){
+            q = q + `&years=${this.state.stopyear}`}
         q = q + `&page=1`
         history.push(`/filtered?${q}`)
     }
@@ -104,6 +106,7 @@ export default class Sidebar extends React.Component{
     
 
     render(){
+        console.log(this.state)
         return(
             <div>
                 <Nav className="p-2 text-left col-md-12 d-none d-md-block bg-dark text-white sidebar"
