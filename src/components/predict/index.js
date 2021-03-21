@@ -77,7 +77,7 @@ export default class Predict extends React.Component{
     }
 
     predictRating(){
-        console.log(this.state)
+        // console.log(this.state)
         const st = this.state.selectedTags
         const sg = this.state.selectedGenres
         var q = ''
@@ -155,7 +155,7 @@ export default class Predict extends React.Component{
         }
     }
     render(){
-        console.log(this.state.personalityResults)
+        // console.log(this.state.personalityResults)
         return(
             <div>
             <div className="form">

@@ -42,17 +42,4 @@ function App() {
     );
 }
 
-// export default App;
-// function App(){
-//   return (
-//     <BrowserRouter>
-//       <div>
-//         <Switch>
-//           <Route exact path='/' render={props => <Main {...props} />} />
-//           <Route path='/search' render={props => <Search {...props}/>}/>
-//         </Switch>
-//       </div>
-//     </BrowserRouter>
-//   )
-// }
 export default App;

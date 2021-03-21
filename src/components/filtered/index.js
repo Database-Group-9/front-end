@@ -59,7 +59,7 @@ export default class Filtered extends React.Component{
     }
     
     getPageData(i) {
-        console.log(i)
+        // console.log(i)
         if (i != this.state.page){
             this.setState({ready: false});
             history.push('/filtered'+helper.updatePage(this.props.req ,i))
@@ -85,7 +85,7 @@ export default class Filtered extends React.Component{
     }
  
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         if (this.state.ready) {
         return <div>
             <Container fluid>
