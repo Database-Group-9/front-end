@@ -117,13 +117,11 @@ export default class Predict extends React.Component{
                 this.setState({
                     ischanged: false,
                 })
-                this.renderResults()
             }
             if (this.state.ispersonality){
                 this.setState({
                     ischanged: false,
                 })
-                this.renderResults()
             }
         }
     }
