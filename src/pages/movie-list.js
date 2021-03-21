@@ -25,6 +25,9 @@ export default class MovieListPage extends React.Component {
 }
 
 function extractTitle(str){
+    if (str == ''){
+        return 0
+    }
     const arr = str.split('?')[1].split('&')
     for (let i = 0; i < arr.length; i++){
         const left = arr[i].split('=')[0]
