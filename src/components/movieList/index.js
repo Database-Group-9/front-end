@@ -32,7 +32,7 @@ export default class MovieListPage extends React.Component{
             this.setState({
                 results: response.data.data,
                 totalPage: response.data.meta.totalPage,
-                ready: true,
+                
             })
             // console.log(response)
         })
@@ -52,7 +52,8 @@ export default class MovieListPage extends React.Component{
             this.setState({
                 years: response.data.data,
                 startyear: response.data.data[0].year,
-                stopyear: response.data.data[response.data.data.length-1].year
+                stopyear: response.data.data[response.data.data.length-1].year,
+                ready: true,
             });
         });
     }

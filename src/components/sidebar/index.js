@@ -142,9 +142,10 @@ export default class Sidebar extends React.Component{
                     Filter By Year:
                 </Nav.Item>
                     <div>
+                    From
                     <Dropdown>
                         <Dropdown.Toggle variant="primary" style={{ maxHeight: "50px"}} id="dropdown-basic">
-                            From
+                            {this.state.startyear}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {this.props.years.map((data) =>
@@ -152,9 +153,10 @@ export default class Sidebar extends React.Component{
                              )}
                         </Dropdown.Menu>
                     </Dropdown>
+                    To
                     <Dropdown>
                         <Dropdown.Toggle variant="primary" style={{ maxHeight: "50px" }} id="dropdown-basic">
-                            To
+                            {this.state.stopyear}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {this.props.years.map((data) =>
