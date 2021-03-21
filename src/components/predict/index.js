@@ -9,6 +9,8 @@ export default class Predict extends React.Component{
         this.state={
             genres: [],
             tags: [],
+            selectedGenres: [],
+            selectedTags: [],
         }
         this.getGenre()
         this.getTag()
@@ -32,8 +34,22 @@ export default class Predict extends React.Component{
         });
     }
 
+    handleChangeGenre(e){
+        let selectedvalue = e.map(val => {return val.value})
+        this.setState({
+            selectedGenres: selectedvalue
+        })
+    }
+
+    handleChangeTags(e){
+        let selectedvalue = e.map(val => {return val.value})
+        this.setState({
+            selectedTags: selectedvalue
+        })
+    }
+
     render(){
-        // console.log(this.state)
+        console.log(this.state)
         return(
             <div className="form">
                 <Form>{/* <Form onSubmit={e=> this.handleSubmit(e)}> */}
@@ -45,13 +61,19 @@ export default class Predict extends React.Component{
                         <Col>
                         <Form.Group controlId="sector">
                             <Form.Label>Genres:</Form.Label>
-                            <Select options={this.state.genres} isMulti/>{/* onChange={this.handleChange} */}
+                            <Select 
+                                options={this.state.genres} 
+                                isMulti 
+                                onChange={this.handleChangeGenre.bind(this)}/>{/* onChange={this.handleChange} */}
                         </Form.Group>
                         </Col>
                         <Col>
                         <Form.Group as={Col} controlId="startYear">
                             <Form.Label>Tags</Form.Label>
-                            <Select options={this.state.tags} isMulti/>
+                            <Select 
+                                options={this.state.tags} 
+                                isMulti
+                                onChange={this.handleChangeTags.bind(this)}/>
                         </Form.Group>
                         </Col>
                     </Form.Row>                   
