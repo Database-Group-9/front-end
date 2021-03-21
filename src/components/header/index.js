@@ -18,10 +18,16 @@ export default class Header extends React.Component{
     }
 
     handleStartSearching(){
+        if (this.state.term === undefined){
+            return 
+        }
         history.push(`/?filterBy=title&filter=${this.state.term}`)
     }
 
     handleclick(e){
+        if (this.state.term === undefined){
+            return 
+        }
         if(e.code === 'Enter'){
             history.push(`/?filterBy=title&filter=${this.state.term}`)
         }
