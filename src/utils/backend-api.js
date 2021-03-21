@@ -32,7 +32,7 @@ const API = {
     },
 
     getTags: () => {
-        return Axios.get(base_url + 'tags')
+        return Axios.get(base_url + 'tags/unique')
     },
 
     getYear: () => {
