@@ -8,7 +8,7 @@ export default class FilteredPage extends React.Component {
         // console.log(this.props)
             return <Filtered 
             path={this.props.location.pathname} 
-            page={extractSearchTerm(this.props.location.search, 'page')} 
+            page={extractSearchTerm(this.props.location.search, 'page')}
             req = {this.props.location.search}/>
         }
 }

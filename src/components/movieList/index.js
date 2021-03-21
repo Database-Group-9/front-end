@@ -48,6 +48,7 @@ export default class MovieListPage extends React.Component{
 
     getYear(){
         API.getYear().then((response) => {
+            console.log(response)
             this.setState({
                 years: response.data.data,
                 startyear: response.data.data[0].year,
@@ -84,7 +85,6 @@ export default class MovieListPage extends React.Component{
     }
  
     render() {
-        console.log(this.state)
         if (this.state.ready) {
         return <div>
             <Container fluid>
