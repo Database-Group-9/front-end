@@ -1,40 +1,62 @@
 import React from 'react'
 import { Form, Button, Col } from 'react-bootstrap';
+import './predict.scss'
+import Select from 'react-select'
+import API from '../../utils/backend-api'
 export default class Predict extends React.Component{
     constructor(props){
     super(props)
+        this.state={
+            genres: [],
+            tags: [],
+        }
+        this.getGenre()
+        this.getTag()
+    }
+
+    getGenre(){
+        API.getGenre().then((response) => {
+            const stategenre = response.data.data.map(genre => {return {value: genre.genreid,label:genre.genre }})
+            this.setState({
+                genres: stategenre,
+            });
+        });
+    }
+
+    getTag(){
+        API.getTags().then((response) => {
+            const statetags = response.data.data.map(tag => {return {value: tag.tag,label:tag.tag }})
+            this.setState({
+                tags: statetags,
+            });
+        });
     }
 
     render(){
-        
-        const years = [1990,1991,1992,1993,2000,2018,2019,2020];
-        const yearsOptions = years.map(year=> <option key={year} value={year}>{year}</option>);
+        // console.log(this.state)
         return(
             <div className="form">
                 <Form>{/* <Form onSubmit={e=> this.handleSubmit(e)}> */}
-                    <Form.Group controlId="country">
-                        <Form.Label>Recipient country: </Form.Label>
+                    <Form.Group controlId="Title" className="title">
+                        <Form.Label>Title: </Form.Label>
                         <Form.Control type="text" name="country"/>
                     </Form.Group>
-                    <Form.Group controlId="sector">
-                        <Form.Label>Sector:</Form.Label>
-                        <Form.Control type="text" name="sector"/>{/* onChange={this.handleChange} */}
-                    </Form.Group>
-                    <Form.Row>
+                    <Form.Row >
+                        <Col>
+                        <Form.Group controlId="sector">
+                            <Form.Label>Genres:</Form.Label>
+                            <Select options={this.state.genres} isMulti/>{/* onChange={this.handleChange} */}
+                        </Form.Group>
+                        </Col>
+                        <Col>
                         <Form.Group as={Col} controlId="startYear">
-                            <Form.Label>Start Year</Form.Label>
-                            <Form.Control as="select" name="startYear">
-                                {yearsOptions}
-                            </Form.Control>
+                            <Form.Label>Tags</Form.Label>
+                            <Select options={this.state.tags} isMulti/>
                         </Form.Group>
-                        <Form.Group as={Col} controlId="endYear">
-                            <Form.Label>End Year</Form.Label>
-                            <Form.Control as="select" name="endYear">
-                                {yearsOptions}
-                            </Form.Control>
-                        </Form.Group>
-                    </Form.Row>
-                    <Button variant="primary" type="submit">Search</Button>
+                        </Col>
+                    </Form.Row>                   
+                    <Button className="button" variant="primary" type="submit">Predict personality</Button>
+                    <Button className="button" variant="primary" type="submit">Predict rating</Button>
                 </Form>
             </div>
         )}

@@ -31,6 +31,10 @@ const API = {
         return Axios.get(base_url + 'genres')
     },
 
+    getTags: () => {
+        return Axios.get(base_url + 'tags')
+    },
+
     getYear: () => {
         return Axios.get(base_url + 'years')
     },
