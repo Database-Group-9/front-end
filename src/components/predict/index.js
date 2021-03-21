@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Col,Dropdown } from 'react-bootstrap';
+import { Form, Button, Col,Dropdown,Table } from 'react-bootstrap';
 import './predict.scss'
 import Select from 'react-select'
 import API from '../../utils/backend-api'
@@ -15,6 +15,11 @@ export default class Predict extends React.Component{
             tags: [],
             selectedGenres: [],
             selectedTags: [],
+            ispersonality: false,
+            isratings:false,
+            ischanged:false,
+            personalityResults: undefined,
+            ratingsResults: undefined,
         }
         this.getGenre()
         this.getTag()
@@ -62,9 +67,13 @@ export default class Predict extends React.Component{
             q = q + 'tag=' + st[i]
         }
         API.getPersonalityPredictions(q).then((response) =>{
-            console.log(response)
-        })
-        
+            this.setState({
+                personalityResults: response.data,
+                ispersonality: true,
+                ischanged: true,
+                isratings:false,
+            })
+        })        
     }
 
     predictRating(){
@@ -88,10 +97,67 @@ export default class Predict extends React.Component{
             q = q + 'genreId=' + sg[i]
         }
         API.getRatingPredictions(q).then((response) =>{
-            console.log(response)
+            this.setState({
+                ratingsResults: response.data,
+                ischanged:true,
+                isratings: true,
+                ispersonality: false,
+            })
         })
+        
+    }
+
+    componentDidUpdate(){
+        this.updateResults()
+    }
+
+    updateResults(){
+        if (this.state.ischanged){
+            if (this.state.isratings){
+                this.setState({
+                    ischanged: false,
+                })
+                this.renderResults()
+            }
+            if (this.state.ispersonality){
+                this.setState({
+                    ischanged: false,
+                })
+                this.renderResults()
+            }
+        }
+    }
+
+    renderResults(){
+        if (this.state.isratings){
+            return this.state.ratingsResults.average
+        }
+        if (this.state.ispersonality){
+            const table = <Table striped bordered hover variant="dark">
+            <thead>
+                <tr>
+                    <th>aggreableness</th>
+                    <th>conscientiousness</th>
+                    <th>emotional stability</th>
+                    <th>extraversion</th>
+                    <th>openness</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr key="1">
+                    <td>{this.state.personalityResults.data[0].agreeableness}</td>
+                    <td>{this.state.personalityResults.data[0].conscientiousness}</td>
+                    <td>{this.state.personalityResults.data[0].emotional_stability}</td>
+                    <td>{this.state.personalityResults.data[0].extraversion}</td>
+                    <td>{this.state.personalityResults.data[0].openness}</td>
+                </tr>
+            </tbody>
+            </Table>
+            return table
+        }
     }
     render(){
+        console.log(this.state.personalityResults)
         return(
             <div>
             <div className="form">
@@ -127,6 +193,7 @@ export default class Predict extends React.Component{
             <div>
             <Divider/>
                 <h5>Prediction Results:</h5>
+                {this.renderResults()}
             </div>
             </div>
         )}
