@@ -106,7 +106,7 @@ export default class Sidebar extends React.Component{
     
 
     render(){
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <div>
                 <Nav className="p-2 text-left col-md-12 d-none d-md-block bg-dark text-white sidebar"

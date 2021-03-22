@@ -54,7 +54,7 @@ export default class MovieListPage extends React.Component{
 
     getYear(){
         API.getYear().then((response) => {
-            console.log(response)
+            // console.log(response)
             this.setState({
                 years: response.data.data,
                 startyear: response.data.data[0].year,
@@ -65,7 +65,7 @@ export default class MovieListPage extends React.Component{
     }
     
     getPageData(i) {
-        console.log(i)
+        // console.log(i)
         if (i != this.state.page){
             this.setState({ready: false});
             history.push(`/?page=${i}`);
@@ -112,11 +112,16 @@ export default class MovieListPage extends React.Component{
     }
 
     handleStartSearching(){
-        // console.log(this.state.term)
+        if (this.state.term === undefined){
+            return
+        }
         history.push(`/?filterBy=title&filter=${this.state.term}`)
     }
 
     handleclick(e){
+        if (this.state.term === undefined){
+            return
+        }
         if(e.code === 'Enter'){
             history.push(`/?filterBy=title&filter=${this.state.term}`)
         }
@@ -124,7 +129,7 @@ export default class MovieListPage extends React.Component{
 
  
     render() {
-        console.log(this.props.title)
+        // console.log(this.props.title)
         if (this.state.ready) {
         return <div>
             <Container fluid>
